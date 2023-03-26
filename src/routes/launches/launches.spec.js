@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../../app");
 
-describe("GET /launches", () => {
+describe("GET /v1/launches", () => {
     test("It should respond with 200 success", async () => {
         const response = await request(app).get("/launches");
         expect(response.statusCode).toBe(200);
@@ -9,7 +9,7 @@ describe("GET /launches", () => {
 });
 
 
-describe('Test POST /launches', () => {
+describe('Test POST /v1/launches', () => {
     test('It should respond with 201 created', async () => {
         const response = await request(app)
         .post("/launches")
@@ -26,7 +26,7 @@ describe('Test POST /launches', () => {
 
         test('It should catch missing required properties', async () => {
             const response = await request(app)
-            .post("/launches")
+            .post("/v1/launches")
 
         });
 
