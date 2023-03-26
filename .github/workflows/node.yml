@@ -1,0 +1,18 @@
+name: NASA Project CI
+on:
+  push:
+    branches: [ main, develop ]  #Run from the branch you have on your github
+  pull_request:
+    branches: [ main, develop ] # Run when a pull request is sent to the main branch
+jobs:
+  build:
+    runs-on: [ ubuntu-latest ]  # Install Ubuntun
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js version 16
+        uses: actions/setup-node@v2 #Install Node
+        with:
+          node-version: '16'
+      - run: npm install  # Execute Command, you can add multiple run statement
+  # deploy: 
+  #   needs: build
