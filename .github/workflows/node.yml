@@ -7,10 +7,12 @@ on:
 jobs:
   build:
     env:
+      MONGO_URL: mongodb://localhost/nasa
       CI: true  # disable watch mode for testing for react app
     strategy:
       matrix: 
         node-version: [14.x, 16.x] # Ensures our code works on other versions identifying the versions
+        mongodb-version: ['4.4']
     runs-on: [ ubuntu-latest ]  # Install Ubuntun
     steps:
       - uses: actions/checkout@v2  # Tells github actions what to do when we checkout
@@ -18,6 +20,10 @@ jobs:
         uses: actions/setup-node@v2 #Install Node
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Use MongoDB from GitHub actions
+        uses: supercharge/mongodb-github-action@1.6.0  # Start a mongoDB server on port 2701 or custom port
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - run: npm install  # Execute Command, you can add multiple run statement
      # - run: npm test # Run our tests
   # deploy: 
