@@ -1,9 +1,9 @@
 name: NASA Project CI
 on:
   push:
-    branches: [ main ]  #Run from the branch you have on your github
+    branches: [ main, develop ]  #Run from the branch you have on your github
   pull_request:
-    branches: [ main ] # Run when a pull request is sent to the main branch
+    branches: [ main, develop ] # Run when a pull request is sent to the main branch
 jobs:
   build:
     runs-on: [ ubuntu-latest ]  # Install Ubuntun
