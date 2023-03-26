@@ -6,13 +6,19 @@ on:
     branches: [ main, develop ] # Run when a pull request is sent to the main branch
 jobs:
   build:
+    env:
+      CI: true  # disable watch mode for testing for react app
+    strategy:
+      matrix: 
+        node-version: [14.x, 16.x] # Ensures our code works on other versions identifying the versions
     runs-on: [ ubuntu-latest ]  # Install Ubuntun
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js version 16
+      - uses: actions/checkout@v2  # Tells github actions what to do when we checkout
+      - name: Use Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v2 #Install Node
         with:
-          node-version: '16'
+          node-version: ${{ matrix.node-version }}
       - run: npm install  # Execute Command, you can add multiple run statement
+      - run: npm test # Run our tests
   # deploy: 
   #   needs: build
